@@ -1,0 +1,244 @@
+<svg width="400" height="1200" viewBox="0 0 400 1200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mini Sitar SVG -->
+  <defs>
+    <!-- Gradient for wood texture -->
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradient for gourd/tumba -->
+    <radialGradient id="gourdGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#DAA520;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#CD853F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Decorative gradient -->
+    <radialGradient id="decorGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+      <stop offset="70%" style="stop-color:#DAA520;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:0.4" />
+    </radialGradient>
+    
+    <!-- Metal gradient for strings -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8E8E8;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A9A9A9;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <!-- Shine gradient -->
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main gourd/tumba (resonator) - smaller and positioned lower -->
+  <ellipse cx="200" cy="1080" rx="120" ry="95" fill="url(#gourdGrad)" stroke="#654321" stroke-width="3"/>
+  
+  <!-- Gourd decorative details -->
+  <ellipse cx="200" cy="1080" rx="110" ry="85" fill="none" stroke="#CD853F" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="200" cy="1080" rx="100" ry="75" fill="none" stroke="#DAA520" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Decorative floral pattern on gourd -->
+  <g opacity="0.5">
+    <circle cx="200" cy="1080" r="50" fill="none" stroke="#8B4513" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <circle cx="200" cy="1080" r="40" fill="none" stroke="#CD853F" stroke-width="1" stroke-dasharray="2,2"/>
+    <!-- Decorative dots -->
+    <circle cx="200" cy="1030" r="3" fill="#DAA520"/>
+    <circle cx="200" cy="1130" r="3" fill="#DAA520"/>
+    <circle cx="150" cy="1080" r="3" fill="#DAA520"/>
+    <circle cx="250" cy="1080" r="3" fill="#DAA520"/>
+    <circle cx="170" cy="1050" r="2" fill="#CD853F"/>
+    <circle cx="230" cy="1050" r="2" fill="#CD853F"/>
+    <circle cx="170" cy="1110" r="2" fill="#CD853F"/>
+    <circle cx="230" cy="1110" r="2" fill="#CD853F"/>
+  </g>
+  
+  <!-- Tabli (soundboard on gourd) -->
+  <ellipse cx="200" cy="1060" rx="75" ry="60" fill="#DEB887" stroke="#8B4513" stroke-width="2"/>
+  
+  <!-- Soundboard decoration -->
+  <g>
+    <circle cx="200" cy="1060" r="35" fill="none" stroke="#8B4513" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="200" cy="1060" r="25" fill="none" stroke="#A0522D" stroke-width="1" opacity="0.4"/>
+    <circle cx="200" cy="1060" r="6" fill="#654321"/>
+    <circle cx="200" cy="1060" r="3" fill="#8B4513"/>
+  </g>
+  
+  <!-- Decorative inlay on tabli -->
+  <g opacity="0.6">
+    <path d="M 200 1035 Q 210 1045 200 1055 Q 190 1045 200 1035" fill="#DAA520"/>
+    <path d="M 200 1065 Q 210 1075 200 1085 Q 190 1075 200 1065" fill="#DAA520"/>
+    <path d="M 175 1060 Q 185 1070 175 1080 Q 165 1070 175 1060" fill="#DAA520"/>
+    <path d="M 225 1060 Q 235 1070 225 1080 Q 215 1070 225 1060" fill="#DAA520"/>
+  </g>
+  
+  <!-- Neck (dand) - shorter for mini version -->
+  <rect x="187" y="200" width="26" height="860" fill="url(#woodGrad)" stroke="#654321" stroke-width="2" rx="3"/>
+  
+  <!-- Fretboard with shine -->
+  <rect x="189" y="200" width="22" height="860" fill="#A0522D" opacity="0.4"/>
+  <rect x="193" y="210" width="8" height="840" fill="url(#shineGrad)" opacity="0.3"/>
+  
+  <!-- Decorative inlays on neck -->
+  <g fill="#DAA520" opacity="0.6">
+    <circle cx="200" cy="280" r="4"/>
+    <circle cx="200" cy="400" r="4"/>
+    <circle cx="200" cy="520" r="4"/>
+    <circle cx="200" cy="640" r="4"/>
+    <circle cx="200" cy="760" r="4"/>
+    <circle cx="200" cy="880" r="4"/>
+  </g>
+  
+  <!-- Frets (movable curved frets - pardā) - fewer for mini version -->
+  <g id="frets" stroke="#FFD700" stroke-width="2" fill="none">
+    <path d="M 182 270 Q 200 272 218 270" stroke-linecap="round"/>
+    <path d="M 182 340 Q 200 342 218 340" stroke-linecap="round"/>
+    <path d="M 182 410 Q 200 412 218 410" stroke-linecap="round"/>
+    <path d="M 182 480 Q 200 482 218 480" stroke-linecap="round"/>
+    <path d="M 182 560 Q 200 562 218 560" stroke-linecap="round"/>
+    <path d="M 182 640 Q 200 642 218 640" stroke-linecap="round"/>
+    <path d="M 182 720 Q 200 722 218 720" stroke-linecap="round"/>
+    <path d="M 182 800 Q 200 802 218 800" stroke-linecap="round"/>
+    <path d="M 182 880 Q 200 882 218 880" stroke-linecap="round"/>
+    <path d="M 182 960 Q 200 962 218 960" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Fret binding detail -->
+  <g stroke="#8B4513" stroke-width="0.5" fill="none" opacity="0.5">
+    <path d="M 181 270 Q 200 272 219 270"/>
+    <path d="M 181 340 Q 200 342 219 340"/>
+    <path d="M 181 410 Q 200 412 219 410"/>
+    <path d="M 181 480 Q 200 482 219 480"/>
+    <path d="M 181 560 Q 200 562 219 560"/>
+    <path d="M 181 640 Q 200 642 219 640"/>
+    <path d="M 181 720 Q 200 722 219 720"/>
+    <path d="M 181 800 Q 200 802 219 800"/>
+    <path d="M 181 880 Q 200 882 219 880"/>
+    <path d="M 181 960 Q 200 962 219 960"/>
+  </g>
+  
+  <!-- Upper tumba (smaller decorative gourd) -->
+  <ellipse cx="200" cy="170" rx="70" ry="55" fill="url(#gourdGrad)" stroke="#654321" stroke-width="2"/>
+  <ellipse cx="200" cy="170" rx="62" ry="48" fill="none" stroke="#CD853F" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Decorative pattern on upper gourd -->
+  <g opacity="0.6">
+    <circle cx="200" cy="170" r="30" fill="none" stroke="#8B4513" stroke-width="1" stroke-dasharray="2,2"/>
+    <circle cx="200" cy="170" r="20" fill="none" stroke="#DAA520" stroke-width="0.8"/>
+    <circle cx="200" cy="155" r="2" fill="#DAA520"/>
+    <circle cx="200" cy="185" r="2" fill="#DAA520"/>
+    <circle cx="180" cy="170" r="2" fill="#DAA520"/>
+    <circle cx="220" cy="170" r="2" fill="#DAA520"/>
+  </g>
+  
+  <!-- Headstock (ornate top) -->
+  <path d="M 180 70 L 175 80 L 175 120 L 180 200 L 220 200 L 225 120 L 225 80 L 220 70 Z" 
+        fill="url(#woodGrad)" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Headstock decoration -->
+  <ellipse cx="200" cy="90" rx="22" ry="15" fill="#DAA520" opacity="0.6"/>
+  <circle cx="200" cy="90" r="10" fill="#654321"/>
+  <circle cx="200" cy="90" r="5" fill="#DAA520"/>
+  
+  <!-- Decorative carving on headstock -->
+  <g opacity="0.5">
+    <path d="M 190 110 Q 200 105 210 110" stroke="#CD853F" stroke-width="1.5" fill="none"/>
+    <path d="M 190 130 Q 200 125 210 130" stroke="#CD853F" stroke-width="1.5" fill="none"/>
+    <path d="M 190 150 Q 200 145 210 150" stroke="#CD853F" stroke-width="1.5" fill="none"/>
+  </g>
+  
+  <!-- Tuning pegs (kuntis) - more compact -->
+  <g id="tuning-pegs">
+    <!-- Left side pegs -->
+    <rect x="155" y="100" width="25" height="6" fill="#8B4513" stroke="#654321" stroke-width="1" rx="2"/>
+    <circle cx="155" cy="103" r="3" fill="#654321"/>
+    
+    <rect x="155" y="125" width="25" height="6" fill="#8B4513" stroke="#654321" stroke-width="1" rx="2"/>
+    <circle cx="155" cy="128" r="3" fill="#654321"/>
+    
+    <rect x="155" y="150" width="25" height="6" fill="#8B4513" stroke="#654321" stroke-width="1" rx="2"/>
+    <circle cx="155" cy="153" r="3" fill="#654321"/>
+    
+    <!-- Right side pegs -->
+    <rect x="220" y="100" width="25" height="6" fill="#8B4513" stroke="#654321" stroke-width="1" rx="2"/>
+    <circle cx="245" cy="103" r="3" fill="#654321"/>
+    
+    <rect x="220" y="125" width="25" height="6" fill="#8B4513" stroke="#654321" stroke-width="1" rx="2"/>
+    <circle cx="245" cy="128" r="3" fill="#654321"/>
+    
+    <rect x="220" y="150" width="25" height="6" fill="#8B4513" stroke="#654321" stroke-width="1" rx="2"/>
+    <circle cx="245" cy="153" r="3" fill="#654321"/>
+  </g>
+  
+  <!-- Peg decoration -->
+  <g opacity="0.6">
+    <circle cx="155" cy="103" r="1.5" fill="#DAA520"/>
+    <circle cx="155" cy="128" r="1.5" fill="#DAA520"/>
+    <circle cx="155" cy="153" r="1.5" fill="#DAA520"/>
+    <circle cx="245" cy="103" r="1.5" fill="#DAA520"/>
+    <circle cx="245" cy="128" r="1.5" fill="#DAA520"/>
+    <circle cx="245" cy="153" r="1.5" fill="#DAA520"/>
+  </g>
+  
+  <!-- Bridge (ghodi) on soundboard -->
+  <ellipse cx="200" cy="1055" rx="30" ry="10" fill="#F5DEB3" stroke="#8B4513" stroke-width="2"/>
+  <rect x="188" y="1047" width="24" height="16" fill="#DEB887" stroke="#8B4513" stroke-width="1" rx="2"/>
+  
+  <!-- Bridge decoration -->
+  <line x1="192" y1="1050" x2="208" y2="1050" stroke="#8B4513" stroke-width="0.5"/>
+  <line x1="192" y1="1055" x2="208" y2="1055" stroke="#8B4513" stroke-width="0.5"/>
+  <line x1="192" y1="1060" x2="208" y2="1060" stroke="#8B4513" stroke-width="0.5"/>
+  
+  <!-- Main playing strings (4 main + 2 chikari for mini version) -->
+  <g id="strings" opacity="0.9">
+    <!-- Main playing strings -->
+    <line x1="193" y1="200" x2="193" y2="1055" stroke="url(#metalGrad)" stroke-width="1.5"/>
+    <line x1="197" y1="200" x2="197" y2="1055" stroke="url(#metalGrad)" stroke-width="1.2"/>
+    <line x1="203" y1="200" x2="203" y2="1055" stroke="url(#metalGrad)" stroke-width="1.2"/>
+    <line x1="207" y1="200" x2="207" y2="1055" stroke="url(#metalGrad)" stroke-width="1.5"/>
+    
+    <!-- Chikari strings (rhythm/drone strings) -->
+    <line x1="189" y1="200" x2="189" y2="1055" stroke="url(#metalGrad)" stroke-width="0.8"/>
+    <line x1="211" y1="200" x2="211" y2="1055" stroke="url(#metalGrad)" stroke-width="0.8"/>
+  </g>
+  
+  <!-- Sympathetic strings (tarab) - fewer for mini version -->
+  <g id="sympathetic-strings" opacity="0.3">
+    <line x1="177" y1="200" x2="177" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    <line x1="180" y1="200" x2="180" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    <line x1="183" y1="200" x2="183" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    <line x1="186" y1="200" x2="186" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    
+    <line x1="214" y1="200" x2="214" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    <line x1="217" y1="200" x2="217" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    <line x1="220" y1="200" x2="220" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+    <line x1="223" y1="200" x2="223" y2="1045" stroke="#C0C0C0" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Nut (upper bridge) -->
+  <rect x="186" y="198" width="28" height="4" fill="#F5DEB3" stroke="#8B4513" stroke-width="1" rx="1"/>
+  
+  <!-- Decorative binding on sides of neck -->
+  <g opacity="0.4">
+    <line x1="187" y1="210" x2="187" y2="1050" stroke="#DAA520" stroke-width="0.8"/>
+    <line x1="213" y1="210" x2="213" y2="1050" stroke="#DAA520" stroke-width="0.8"/>
+  </g>
+  
+  <!-- Wood grain details -->
+  <g opacity="0.15">
+    <line x1="190" y1="220" x2="190" y2="1040" stroke="#654321" stroke-width="0.5"/>
+    <line x1="210" y1="220" x2="210" y2="1040" stroke="#654321" stroke-width="0.5"/>
+    <line x1="195" y1="230" x2="195" y2="1030" stroke="#654321" stroke-width="0.3"/>
+    <line x1="205" y1="230" x2="205" y2="1030" stroke="#654321" stroke-width="0.3"/>
+  </g>
+  
+  <!-- Final shine effect on gourd -->
+  <ellipse cx="170" cy="1060" rx="30" ry="40" fill="#ffffff" opacity="0.15"/>
+  <ellipse cx="230" cy="1100" rx="25" ry="30" fill="#ffffff" opacity="0.1"/>
+</svg>

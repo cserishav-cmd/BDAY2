@@ -1,0 +1,158 @@
+<svg width="400" height="1200" viewBox="0 0 400 1200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fountain Pen SVG -->
+  <defs>
+    <!-- Gradient for pen body -->
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradient for cap -->
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0f3460;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gold gradient for clip and nib -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#DAA520;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Silver gradient for rings -->
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8E8E8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A9A9A9;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shine effect -->
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+    
+    <!-- Ink gradient -->
+    <linearGradient id="inkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000080;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#000033;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Cap (top part) -->
+  <g id="cap">
+    <!-- Cap finial (top decorative piece) -->
+    <ellipse cx="200" cy="80" rx="25" ry="15" fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1"/>
+    <rect x="175" y="80" width="50" height="20" fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1"/>
+    
+    <!-- Cap body -->
+    <rect x="165" y="100" width="70" height="280" fill="url(#capGrad)" stroke="#0a0a0a" stroke-width="2" rx="5"/>
+    
+    <!-- Shine effect on cap -->
+    <rect x="180" y="120" width="15" height="240" fill="url(#shineGrad)" opacity="0.6" rx="3"/>
+    
+    <!-- Decorative rings on cap -->
+    <rect x="162" y="350" width="76" height="8" fill="url(#silverGrad)" stroke="#888888" stroke-width="1"/>
+    <rect x="162" y="360" width="76" height="3" fill="url(#goldGrad)" stroke="#B8860B" stroke-width="0.5"/>
+    <rect x="162" y="365" width="76" height="8" fill="url(#silverGrad)" stroke="#888888" stroke-width="1"/>
+    
+    <!-- Cap lip -->
+    <rect x="163" y="373" width="74" height="7" fill="#0a0a0a" opacity="0.5"/>
+  </g>
+  
+  <!-- Pen clip -->
+  <g id="clip">
+    <path d="M 205 110 Q 230 110 235 135 L 235 330 Q 235 345 225 350 Q 220 352 215 348" 
+          fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1.5"/>
+    <ellipse cx="220" cy="115" rx="8" ry="6" fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1"/>
+    <!-- Clip detail -->
+    <line x1="217" y1="130" x2="217" y2="335" stroke="#DAA520" stroke-width="1" opacity="0.5"/>
+  </g>
+  
+  <!-- Pen barrel (body) -->
+  <g id="barrel">
+    <!-- Upper barrel -->
+    <rect x="168" y="380" width="64" height="320" fill="url(#bodyGrad)" stroke="#0a0a0a" stroke-width="2" rx="4"/>
+    
+    <!-- Shine effect on barrel -->
+    <rect x="182" y="400" width="12" height="280" fill="url(#shineGrad)" opacity="0.5" rx="2"/>
+    
+    <!-- Decorative ring -->
+    <rect x="165" y="680" width="70" height="10" fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1"/>
+    <rect x="165" y="692" width="70" height="3" fill="url(#silverGrad)" stroke="#888888" stroke-width="0.5"/>
+    <rect x="165" y="697" width="70" height="5" fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1"/>
+  </g>
+  
+  <!-- Section/Grip area -->
+  <g id="section">
+    <path d="M 168 702 L 168 780 Q 168 800 175 810 L 178 820 L 222 820 L 225 810 Q 232 800 232 780 L 232 702 Z" 
+          fill="#2c3e50" stroke="#1a1a1a" stroke-width="1.5"/>
+    
+    <!-- Grip texture lines -->
+    <line x1="170" y1="720" x2="230" y2="720" stroke="#1a1a1a" stroke-width="0.5" opacity="0.5"/>
+    <line x1="170" y1="735" x2="230" y2="735" stroke="#1a1a1a" stroke-width="0.5" opacity="0.5"/>
+    <line x1="170" y1="750" x2="230" y2="750" stroke="#1a1a1a" stroke-width="0.5" opacity="0.5"/>
+    <line x1="170" y1="765" x2="230" y2="765" stroke="#1a1a1a" stroke-width="0.5" opacity="0.5"/>
+    <line x1="170" y1="780" x2="230" y2="780" stroke="#1a1a1a" stroke-width="0.5" opacity="0.5"/>
+    
+    <!-- Thread detail -->
+    <circle cx="200" cy="710" r="3" fill="none" stroke="#1a1a1a" stroke-width="0.5" opacity="0.4"/>
+  </g>
+  
+  <!-- Feed (ink channel) -->
+  <g id="feed">
+    <rect x="195" y="820" width="10" height="60" fill="#1a1a1a" stroke="#000000" stroke-width="1"/>
+    <!-- Feed channels -->
+    <line x1="197" y1="830" x2="197" y2="875" stroke="#333333" stroke-width="0.5"/>
+    <line x1="200" y1="830" x2="200" y2="875" stroke="#333333" stroke-width="0.5"/>
+    <line x1="203" y1="830" x2="203" y2="875" stroke="#333333" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Nib (the golden tip) -->
+  <g id="nib">
+    <!-- Nib body -->
+    <path d="M 178 820 L 170 860 L 175 900 L 190 920 L 200 940 L 210 920 L 225 900 L 230 860 L 222 820 Z" 
+          fill="url(#goldGrad)" stroke="#B8860B" stroke-width="1.5"/>
+    
+    <!-- Nib hole (breather hole) -->
+    <ellipse cx="200" cy="870" rx="6" ry="8" fill="#1a1a1a" stroke="#B8860B" stroke-width="1"/>
+    <ellipse cx="200" cy="870" rx="3" ry="4" fill="#333333"/>
+    
+    <!-- Nib slit (center line) -->
+    <line x1="200" y1="870" x2="200" y2="940" stroke="#1a1a1a" stroke-width="2"/>
+    <line x1="200" y1="870" x2="200" y2="940" stroke="#333333" stroke-width="1"/>
+    
+    <!-- Nib tines detail -->
+    <path d="M 195 900 L 190 920 L 200 940" fill="none" stroke="#DAA520" stroke-width="0.5" opacity="0.6"/>
+    <path d="M 205 900 L 210 920 L 200 940" fill="none" stroke="#DAA520" stroke-width="0.5" opacity="0.6"/>
+    
+    <!-- Nib engraving lines -->
+    <line x1="185" y1="840" x2="215" y2="840" stroke="#B8860B" stroke-width="0.5" opacity="0.7"/>
+    <line x1="182" y1="850" x2="218" y2="850" stroke="#B8860B" stroke-width="0.5" opacity="0.7"/>
+    
+    <!-- Nib shine -->
+    <ellipse cx="190" cy="860" rx="8" ry="12" fill="#FFFFE0" opacity="0.3"/>
+    <ellipse cx="210" cy="865" rx="6" ry="10" fill="#FFFFE0" opacity="0.2"/>
+  </g>
+  
+  <!-- Nib tip point -->
+  <path d="M 198 940 L 200 950 L 202 940 Z" fill="#B8860B" stroke="#8B7500" stroke-width="0.5"/>
+  
+  <!-- Ink drop at tip (optional decorative element) -->
+  <ellipse cx="200" cy="960" rx="4" ry="6" fill="url(#inkGrad)" opacity="0.7"/>
+  <ellipse cx="200" cy="958" rx="2" ry="3" fill="#000080" opacity="0.9"/>
+  
+  <!-- Brand name engraving on cap (optional) -->
+  <text x="200" y="240" font-family="serif" font-size="12" fill="#DAA520" text-anchor="middle" opacity="0.6" font-style="italic">ELEGANCE</text>
+  
+  <!-- Detail highlights -->
+  <g opacity="0.3">
+    <ellipse cx="200" cy="150" rx="20" ry="40" fill="#ffffff" opacity="0.2"/>
+    <ellipse cx="200" cy="500" rx="18" ry="60" fill="#ffffff" opacity="0.15"/>
+  </g>
+</svg>

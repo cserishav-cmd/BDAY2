@@ -1,0 +1,2276 @@
+:root {
+    /* --- Sitar Theme Colors --- */
+    --primary-color: #d4af37;
+    /* Gold (Brass Frets) */
+    --wood-dark: #3e2723;
+    /* Dark Walnut */
+    --wood-check: #5d4037;
+    /* Lighter Wood */
+    --bg-ivory: #fff8e1;
+    /* Ivory/Paper */
+    --string-silver: #e0e0e0;
+    /* Silver Strings */
+
+    --text-primary: #3e2723;
+    --text-secondary: #5d4037;
+
+    --bg-soft: var(--bg-ivory);
+    --glass-bg: rgba(255, 248, 225, 0.9);
+    --glass-border: rgba(62, 39, 35, 0.3);
+    --glass-shadow: 0 8px 32px 0 rgba(62, 39, 35, 0.15);
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+    --font-script: 'Dancing Script', cursive;
+    --font-bengali: 'Tiro Bangla', serif;
+    /* Book Style Bengali Font */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-body);
+    background: radial-gradient(circle, #fff8e1 0%, #ffe0b2 100%);
+    /* Warm Ivory to Wood */
+    color: var(--text-primary);
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Sitar Wooden Frame Border */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 12px solid var(--wood-dark);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* --- Backgrounds & Particles --- */
+.bg-gradient {
+    display: none;
+    /* Replaced by body gradient */
+}
+
+.floating-shape {
+    position: fixed;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    opacity: 0.3;
+    filter: blur(60px);
+    z-index: -1;
+    animation: float 20s infinite alternate;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -50px;
+    left: -50px;
+}
+
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: -100px;
+    animation-duration: 25s;
+    background: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+}
+
+.handwritten-title {
+    font-family: var(--font-bengali);
+    /* Changed to Bengali font for consistency with request */
+    font-size: 2.5rem;
+    color: #555;
+    font-weight: 700;
+    /* Make it bold like a chapter title */
+}
+
+/* --- Utility Classes --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+}
+
+.glass-panel-dark {
+    background: rgba(40, 40, 40, 0.85);
+    /* Dark glass for player */
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+/* --- Sitar Layout Styles --- */
+#sitar-container {
+    position: absolute;
+    top: 50%;
+    left: 22%;
+    /* Slightly closer */
+    transform: translate(-50%, -50%) rotate(-5deg);
+    width: auto;
+    height: 600px;
+    z-index: 5;
+    /* Ensure visible but below specific overlays */
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    /* Full opacity */
+    /* Ambient Glow for Sitar */
+    filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+}
+
+/* --- Polaroid Styles --- */
+.polaroid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+}
+
+.sitar-full {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+
+    margin: 20px;
+}
+
+.polaroid-wrapper-inner {
+    background: #fff;
+    padding: 15px 15px 50px 15px;
+    /* Extra bottom for handwriting */
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: rotate(var(--rotation));
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    cursor: pointer;
+    /* Photo Paper Texture */
+    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(240, 240, 240, 0.5));
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.polaroid-wrapper-inner:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    z-index: 100;
+    /* Highest on hover */
+    box-shadow:
+        0 15px 25px rgba(0, 0, 0, 0.15),
+        0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    filter: sepia(20%) contrast(90%);
+    /* Vintage feel */
+    transition: filter 0.4s ease;
+    display: block;
+}
+
+.polaroid-wrapper-inner:hover .polaroid-photo {
+    filter: sepia(0%) contrast(100%);
+    /* Clear on hover */
+}
+
+.sticker-corner {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 50px;
+    height: 50px;
+    transform: rotate(15deg);
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+    z-index: 5;
+}
+
+.polaroid-handwriting {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-script);
+    font-size: 1.8rem;
+    color: rgba(62, 39, 35, 0.85);
+    /* Ink color */
+    transform: rotate(-3deg);
+    pointer-events: none;
+    line-height: 50px;
+    /* Center in whitespace */
+    mix-blend-mode: multiply;
+    /* Realistic ink blend */
+}
+
+/* Caption (Station Board) */
+.caption {
+    margin-top: 15px;
+    background: #3e2723;
+    color: #ffd700;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* Station board look */
+    border: 2px solid #ffd700;
+}
+
+/* --- Login Form Styles --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#login-pass,
+#login-user {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    background: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: #5d4037;
+    width: 250px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#login-pass:focus,
+#login-user:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    background: white;
+}
+
+#login-btn {
+    padding: 10px 30px;
+    border-radius: 25px;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#login-btn:hover {
+    transform: translateY(-2px);
+    background: #b59021;
+}
+
+#error-msg {
+    color: #e57373;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    transition: opacity 0.3s;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Hero Section --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    text-align: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+}
+
+.polaroid-wrapper {
+    position: relative;
+    padding: 15px 15px 40px 15px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.polaroid-wrapper:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.hero-img {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 15px;
+    /* Space for caption */
+}
+
+.polaroid-caption {
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    color: #444;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.2;
+}
+
+.hero-text {
+    flex: 1;
+    text-align: center;
+}
+
+.greeting-sub {
+    font-family: var(--font-bengali);
+    /* Bengali text often looks better in sans-serif or specialized font, Lato is clean */
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    /* Increased size for Bengali readability */
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+.main-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.divider {
+    border-top: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding: 0.5rem 2rem;
+}
+
+.date {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    font-weight: bold;
+}
+
+/* --- Cuteness Overhaul --- */
+body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewport="0 0 24 24" fill="%23d4af37"><text y="20" font-size="20">✨</text></svg>') 12 12, auto;
+}
+
+/* Sparkle Animation for Text */
+@keyframes sparkle {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(15deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.sparkle-icon {
+    display: inline-block;
+    color: #FFD700;
+    margin-left: 10px;
+    animation: sparkle 2s infinite ease-in-out;
+}
+
+/* Cute Timer Styles */
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 2rem;
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+}
+
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px 20px;
+    border-radius: 20px;
+    /* Round/Pill shape */
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+    /* Soft gold shadow */
+    min-width: 80px;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.time-block:hover {
+    transform: translateY(-5px);
+}
+
+.time-block span:first-child {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #5d4037;
+    background: -webkit-linear-gradient(#5d4037, #8d6e63);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.time-block .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    margin-top: 5px;
+    font-family: var(--font-body);
+    color: #8d6e63;
+}
+
+.separator {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    /* Align visual center */
+    color: rgba(212, 175, 55, 0.5);
+    /* Softer gold */
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* --- Letter Section --- */
+.section {
+    padding: 6rem 2rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.letter-card {
+    /* Cute Paper Background */
+    background-color: #fffbf0;
+    /* Warmer Ivory */
+    background-image:
+        /* Doodles Pattern */
+        radial-gradient(circle, #ffcdd2 10%, transparent 10%),
+        radial-gradient(circle, #e1bee7 10%, transparent 10%),
+        /* Texture */
+        radial-gradient(#d7ccc8 1px, transparent 1px);
+    background-size: 30px 30px, 30px 30px, 20px 20px;
+    background-position: 0 0, 15px 15px, 0 0;
+
+    /* Soft Shape */
+    border-radius: 10px;
+    border: none;
+
+    /* Cute Shadow */
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 10px 20px rgba(0, 0, 0, 0.1);
+
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+    padding: 3rem;
+    position: relative;
+    overflow: visible;
+    /* Allow tape to stick out */
+}
+
+.letter-card:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.letter-body {
+    margin-top: 2rem;
+    font-family: var(--font-bengali);
+    /* Use Book Font */
+    font-size: 1.3rem;
+    /* Comfortable Reading Size */
+    color: #333;
+    line-height: 1.8;
+    /* Loose line height for literature feel */
+}
+
+.letter-body p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.signature {
+    text-align: right;
+    font-family: var(--font-script);
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-top: 2rem;
+}
+
+.pin {
+    /* Check logic: Remove pin, replace with Tape */
+    display: none;
+}
+
+/* Washi Tape Effect */
+.letter-card::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 120px;
+    height: 35px;
+    background-color: rgba(255, 182, 193, 0.8);
+    /* Pink Tape */
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255, 255, 255, 0.5) 50%);
+    background-size: 20px 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
+    z-index: 10;
+}
+
+.stamp {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border: 3px dashed #e57373;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-15deg);
+    opacity: 0.8;
+}
+
+.stamp i {
+    font-size: 2rem;
+    color: #e57373;
+    animation: heartbeat 1.5s infinite;
+}
+
+/* Add a second piece of tape for cuteness */
+.letter-card::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    transform: rotate(2deg);
+    width: 80px;
+    height: 30px;
+    background-color: rgba(179, 229, 252, 0.8);
+    /* Blue Tape */
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.3) 5px, rgba(255, 255, 255, 0.3) 10px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+/* --- Gallery Section --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* --- Gallery Grid Layout (4-Column) --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 Columns as requested */
+    gap: 20px;
+    /* Space between grid items */
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    overflow: visible;
+}
+
+/* Restore SVG for Track */
+#gallery-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Behind items */
+    pointer-events: none;
+    overflow: visible;
+    display: block;
+}
+
+.polaroid-item {
+    width: 100%;
+    /* Fill grid cell */
+    margin-bottom: 3rem;
+    /* Space for next row track */
+    z-index: 2;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Reset defaults */
+    background: none;
+    box-shadow: none;
+    transform: none !important;
+}
+
+/* Remove Odd/Even Alternating Layout */
+.polaroid-item:nth-child(odd),
+.polaroid-item:nth-child(even) {
+    align-self: auto;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* The Photo Card */
+.polaroid-wrapper-inner {
+    background: white;
+    padding: 10px 10px 60px 10px;
+    /* Increased bottom padding for text */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+    width: 100%;
+    /* Responsive to cell */
+    max-width: 250px;
+    flex-shrink: 0;
+    position: relative;
+    transform: rotate(0deg);
+    /* Randomize in JS or keep straight */
+}
+
+.polaroid-handwriting {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+    text-align: center;
+    font-family: var(--font-script);
+    /* Fancy Font */
+    font-size: 1.4rem;
+    /* Larger for single words */
+    color: #555;
+    line-height: 1.1;
+    height: 50px;
+    /* Fixed height area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Slight random rotation effect on hover only */
+.polaroid-item:hover .polaroid-wrapper-inner {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+/* Connector Arm REMOVED */
+.polaroid-item::after {
+    display: none;
+}
+
+.polaroid-item:nth-child(odd)::after {
+    display: none;
+}
+
+.polaroid-item:nth-child(even)::after {
+    display: none;
+}
+
+/* Station Name Board - Indian Railway Style (Formal Font) */
+.caption {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    margin-top: 15px;
+
+    background: #ffcc00;
+    color: black;
+    padding: 8px 15px;
+    font-family: 'Lato', sans-serif;
+    /* Formal sans-serif */
+    font-weight: 900;
+    /* Bold/Black weight */
+    text-transform: uppercase;
+    /* Standard Station Uppercase */
+    border: 3px solid black;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    /* standard readable size */
+    line-height: 1.2;
+    text-align: center;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    white-space: pre-wrap;
+    min-width: 140px;
+    display: inline-block;
+}
+
+/* Pillars for the Board */
+.caption::before,
+.caption::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    width: 4px;
+    height: 15px;
+    background: black;
+    z-index: -1;
+}
+
+.caption::before {
+    left: 15px;
+}
+
+.caption::after {
+    right: 15px;
+}
+
+/* --- Animated Train --- */
+#train-engine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    /* Larger for image */
+    height: auto;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s linear;
+    pointer-events: none;
+    /* Image based styling */
+    background: none;
+    box-shadow: none;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+#train-engine img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* If the image points left by default, flip it here if needed. 
+       Assuming the uploaded image points RIGHT. 
+       If it points LEFT, we might need scaleX(-1). 
+       The uploaded image looks like it points LEFT.
+       So let's flip it to face 'forward' (right) initially? 
+       Actually, rotation handles direction. 
+       Let's assume default orientation matches 0deg. */
+}
+
+/* Smoke Effect */
+.smoke-puff {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99;
+    animation: smokeRise 2s ease-out forwards;
+}
+
+@keyframes smokeRise {
+    0% {
+        transform: scale(0.5) translateY(0);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(3) translateY(-40px);
+        opacity: 0;
+    }
+}
+
+
+/* Reset specific positioning */
+.polaroid-item:nth-child(odd) .caption {
+    right: auto;
+    left: auto;
+}
+
+.polaroid-item:nth-child(even) .caption {
+    left: auto;
+    right: auto;
+}
+
+/* Sticker on the Photo */
+.sticker-corner {
+    width: 70px !important;
+    height: 70px !important;
+    top: -10px;
+    right: -10px;
+    /* Revert positioning relative to wrapper */
+    position: absolute;
+    z-index: 20;
+}
+
+/* Decorative Pen on Letter */
+.dec-pen {
+    position: absolute;
+    bottom: -80px;
+    right: -60px;
+    width: 180px;
+    /* Smaller size */
+    height: auto;
+    transform: rotate(25deg);
+    /* Slightly less tilt */
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
+    /* Tilted to the right */
+    filter: drop-shadow(5px 10px 10px rgba(0, 0, 0, 0.3));
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Mini Sitar on Letter */
+.dec-mini-sitar {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    width: 60px;
+    /* Small icon size */
+    height: auto;
+    opacity: 0.8;
+    transform: rotate(15deg);
+    filter: sepia(0.5) contrast(1.1);
+    /* Match vintage vibe */
+    pointer-events: none;
+}
+
+/* --- Magic Hover Overlay --- */
+.magic-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Cover image area (minus padding) */
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    /* Let clicks pass through to the card */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.polaroid-item:hover .magic-overlay {
+    opacity: 1;
+}
+
+.sticker-img {
+    width: 60%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg) scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    opacity: 0.9;
+}
+
+.polaroid-item:hover .sticker-img {
+    transform: translate(-50%, -50%) rotate(-5deg) scale(1.1);
+    opacity: 1;
+}
+
+.butterfly {
+    position: absolute;
+    color: white;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.polaroid-item:hover .butterfly {
+    opacity: 1;
+}
+
+.b1 {
+    top: 20%;
+    right: 20%;
+    animation: float 3s ease-in-out infinite;
+    animation-delay: 0.1s;
+}
+
+.b2 {
+    bottom: 25%;
+    left: 20%;
+    font-size: 1.2rem;
+    animation: float 4s ease-in-out infinite alternate;
+    animation-delay: 0.3s;
+}
+
+/* Keep caption below overlay */
+.caption {
+    z-index: 10;
+}
+
+/* --- Widgets --- */
+/* Music Player (Bottom Left) */
+.music-player {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 15px;
+    z-index: 100;
+    max-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.music-player:hover {
+    transform: scale(1.02);
+}
+
+.album-art img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.artist-name {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.ctrl-btn:hover {
+    opacity: 1;
+}
+
+.ctrl-btn.play {
+    font-size: 1.2rem;
+}
+
+/* Now Playing Widget (Right Side) */
+.now-playing-widget {
+    display: none;
+    /* Hidden as requested */
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 250px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transform: rotate(2deg);
+    z-index: 10;
+}
+
+.now-playing-widget.active {
+    display: block;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.hero .now-playing-widget {
+    /* Position specifically for hero */
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%) rotate(2deg);
+}
+
+.np-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-script);
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.lyrics-content {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.lyrics-content p.highlight {
+    color: #333;
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+/* --- Split View Modal with Paper Texture --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(20, 20, 20, 0.95);
+    /* Darker backdrop */
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content-wrapper {
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    height: 80vh;
+    /* Fixed height for consistency */
+    background: transparent;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Left Side: Image */
+.modal-image-container {
+    flex: 1.2;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 5px solid white;
+    /* Photo border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: rotate(-2deg);
+}
+
+/* Right Side: Paper Texture */
+.modal-text-container {
+    flex: 0.8;
+    background-color: #f4e4bc;
+    background-image: repeating-linear-gradient(transparent, transparent 29px, rgba(0, 0, 0, 0.08) 30px),
+        radial-gradient(transparent 0, transparent 5px, #f4e4bc 5px);
+    background-size: 100% 30px, 100% 100%;
+    padding: 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Vintage Paper Noise */
+}
+
+.modal-text-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxmaWx0ZXIgaWQ9Im4iPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjUiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbik3IG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==');
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.modal-date {
+    font-family: 'Lato', sans-serif;
+    color: #8b5a2b;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+}
+
+.modal-lyrics {
+    font-family: var(--font-bengali);
+    /* Updated to Book Style Bengali */
+    /* Using script font for Bengali too looks artsy, or fall back */
+    font-size: 2.2rem;
+    color: #4a3b2a;
+    line-height: 1.6;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #8b5a2b;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: transform 0.2s;
+    z-index: 100;
+}
+
+.modal-close-btn:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Responsive Modal */
+@media (max-width: 800px) {
+    .modal-content-wrapper {
+        flex-direction: column;
+        height: 90vh;
+        width: 95%;
+    }
+
+    .modal-image-container {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .modal-text-container {
+        flex: 1;
+        padding: 1.5rem;
+    }
+
+    .modal-lyrics {
+        font-size: 1.5rem;
+    }
+}
+
+/* --- Animations --- */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(30px, -50px) rotate(10deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Scroll Animation Classes */
+.fade-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Butterfly Fly Away Effect */
+@keyframes flyAway {
+    0% {
+        transform: translate(0, 0) rotate(10deg) scale(1);
+        opacity: 1;
+    }
+
+    20% {
+        transform: translate(20px, -40px) rotate(20deg) scale(1.1);
+    }
+
+    40% {
+        transform: translate(-20px, -80px) rotate(-10deg) scale(1.1);
+    }
+
+    60% {
+        transform: translate(30px, -150px) rotate(5deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(60px, -350px) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+.fly-effect {
+    animation: flyAway 3s ease-out forwards;
+    pointer-events: none;
+    z-index: 100 !important;
+}
+
+/* Modal Butterfly/Sticker Animation */
+@keyframes floatSticker {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+        opacity: 0;
+    }
+}
+
+.modal-floating-sticker {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 2001;
+    /* Above modal content */
+    pointer-events: none;
+    animation: floatSticker 4s ease-out forwards;
+}
+
+/* --- Train Journey Animation --- */
+.journey-section {
+    padding: 2rem 0;
+    overflow-x: hidden;
+}
+
+.train-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 60px;
+    backdrop-filter: blur(5px);
+}
+
+.journey-title {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.track {
+    flex: 1;
+    height: 4px;
+    background-color: #555;
+    position: relative;
+    margin: 0 20px;
+    border-radius: 2px;
+}
+
+/* Sleepers detail on track */
+.track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: repeating-linear-gradient(90deg, #555 0, #555 3px, transparent 3px, transparent 15px);
+    transform: translateY(-50%);
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.station {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.station-dot {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--primary-color);
+    margin: 0 auto;
+}
+
+.station-label {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--font-body);
+    font-weight: bold;
+    color: #444;
+}
+
+.train-icon {
+    position: absolute;
+    top: -28px;
+    /* Sit on top of track */
+    left: 0;
+    font-size: 2rem;
+    color: #333;
+    animation: moveTrain 8s linear infinite;
+    z-index: 5;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes moveTrain {
+    0% {
+        left: 0%;
+        transform: scaleX(1);
+    }
+
+    /* Start */
+    45% {
+        left: 50%;
+        transform: scaleX(1);
+    }
+
+    /* Middle */
+    50% {
+        left: 50%;
+        transform: scaleX(1);
+    }
+
+    /* Pause slightly? No, keep moving */
+    90% {
+        left: 95%;
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    /* Arrive */
+    95% {
+        left: 98%;
+        opacity: 0;
+    }
+
+    /* Fade out */
+    96% {
+        left: 0%;
+        opacity: 0;
+    }
+
+    /* Reset */
+    100% {
+        left: 0%;
+        opacity: 1;
+    }
+
+    /* Fade in start */
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .hero-img {
+        width: 250px;
+        height: 320px;
+    }
+
+    .main-title {
+        font-size: 2.8rem;
+    }
+
+    .now-playing-widget {
+        display: none;
+    }
+
+    /* Hide floating widget on small screens for cleaner UI */
+    .gallery-grid {
+        column-count: 2;
+    }
+
+    .letter-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 2.2rem;
+    }
+
+    .gallery-grid {
+        column-count: 1;
+    }
+
+    .music-player {
+        width: calc(100% - 40px);
+        left: 20px;
+        bottom: 20px;
+        padding: 10px 15px;
+    }
+
+    /* Prevent overlap with floating button */
+    .music-player .track-info {
+        max-width: 60%;
+        /* Limit width to avoid hitting button area if they share row */
+        font-size: 0.8rem;
+    }
+
+    .floating-btn {
+        bottom: 90px;
+        /* Move above music player */
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    /* Sitar Adjustment for Mobile */
+    #sitar-container {
+        opacity: 0.3;
+        /* Fade out to not distract */
+        transform: scale(0.6) rotate(15deg);
+        right: -100px;
+    }
+
+    .letter-card {
+        padding: 1.5rem;
+        /* More space for text */
+    }
+
+    .letter-body {
+        font-size: 1.1rem;
+    }
+
+    /* Modal Mobile */
+    .modal-content-wrapper {
+        flex-direction: column;
+        width: 95%;
+        height: 85vh;
+        overflow-y: auto;
+    }
+
+    .modal-img-container {
+        width: 100%;
+        height: 40%;
+    }
+
+    .modal-text-container {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    /* Lyrics Widget Mobile Override when active */
+    .now-playing-widget.active {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-height: 60vh;
+        overflow-y: auto;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* --- Falling Petals Effect --- */
+.petal {
+    position: fixed;
+    top: -10vh;
+    z-index: 9998;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    opacity: 0.8;
+    pointer-events: none;
+    border-radius: 50% 5px 50% 50%;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.petal.style-2 {
+    border-radius: 5px 50% 50% 50%;
+    background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.petal.style-3 {
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    opacity: 0.6;
+    filter: blur(1px);
+    box-shadow: 0 0 5px #fff;
+}
+
+@keyframes fall {
+    0% {
+        top: -10vh;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    100% {
+        top: 105vh;
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes sway {
+    0% {
+        margin-left: 0;
+    }
+
+    50% {
+        margin-left: 50px;
+    }
+
+    100% {
+        margin-left: 0;
+    }
+}
+
+/* --- Floating Lyrics Button --- */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    /* Circle */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.floating-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- Caution Page Overlay --- */
+#caution-page {
+    /* Hidden on Desktop as requested */
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fdfbf7;
+    /* Match letter paper or site bg */
+    background-image: radial-gradient(#e6e2da 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 10000;
+    /* Highest priority */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* --- Journey Tracker Styles --- */
+.journey-container-wrapper {
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.journey-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #5d4037;
+    margin-bottom: 20px;
+}
+
+.journey-tracker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 30px 50px;
+    /* Pillow shape padding */
+    border-radius: 100px;
+    /* Full pill shape */
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+    /* Soft gold glow */
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.station {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+.station-circle {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #d4af37;
+    /* Gold */
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 5px rgba(212, 175, 55, 0.2);
+}
+
+.inner-dot {
+    width: 10px;
+    height: 10px;
+    background: #d4af37;
+    border-radius: 50%;
+}
+
+.station-name {
+    font-family: var(--font-heading);
+    color: #4e342e;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.track-line {
+    flex-grow: 1;
+    height: 6px;
+    background: #e0e0e0;
+    margin: 0 20px;
+    position: relative;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.track-dashes {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg, #a1887f 50%, transparent 50%);
+    background-size: 15px 100%;
+    opacity: 0.5;
+}
+
+.train-icon-wrapper {
+    position: absolute;
+    left: 30%;
+    /* Initial position */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #3e2723;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: trainMove 6s ease-in-out infinite alternate;
+}
+
+@keyframes trainMove {
+    0% {
+        left: 10%;
+    }
+
+    100% {
+        left: 90%;
+    }
+}
+
+/* --- Aesthetic Upgrades for Intro/Caution --- */
+/* Override previous simple styles with premium look */
+
+#intro-page,
+#caution-page {
+    /* Richer Gradient */
+    background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+    /* Soft Peach to Sky or similar matching uploaded img */
+    background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    /* Clean Premium White/Grey */
+    /* Let's try to match the warm 'Journey' image: Cream/Beige */
+    background: radial-gradient(circle at center, #FFF8E1, #FFECB3);
+    /* Warm glow */
+}
+
+.intro-content,
+.caution-content {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    /* Softer corners */
+    padding: 4rem;
+}
+
+/* Soft floating shapes for background interest */
+#intro-page::before,
+#caution-page::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 154, 158, 0.3);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float 10s infinite alternate;
+}
+
+#intro-page::after,
+#caution-page::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(161, 140, 209, 0.3);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float 8s infinite alternate-reverse;
+}
+
+/* --- Enhanced Footer Section --- */
+.footer-section {
+    position: relative;
+    padding: 0;
+    margin-top: 5rem;
+    background: transparent;
+}
+
+.footer-wave {
+    position: absolute;
+    top: -150px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 1;
+}
+
+.footer-wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.footer-wave path {
+    fill: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+    /* Fallback fill */
+    fill: #fff1eb;
+    /* Match the footer bg color */
+}
+
+.footer-content {
+    background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+    /* Matching Intro Gradient */
+    padding: 3rem 1rem 5rem 1rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-heart {
+    font-size: 2.5rem;
+    color: #e57373;
+    margin-bottom: 1rem;
+    animation: heartbeat 2s infinite ease-in-out;
+    filter: drop-shadow(0 5px 15px rgba(229, 115, 115, 0.4));
+}
+
+.footer-section blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: #5d4037;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.credits {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+/* --- Modal Navigation Buttons --- */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3);
+    /* Glassy background */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    /* White icon */
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--primary-color);
+    /* Theme color on hover */
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-btn.prev {
+    left: 20px;
+}
+
+.modal-nav-btn.next {
+    right: 20px;
+}
+
+/* Adjust nav buttons on mobile */
+@media (max-width: 768px) {
+    .modal-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.3);
+        /* Darker on mobile for contrast */
+    }
+
+    .modal-nav-btn.prev {
+        left: 10px;
+    }
+
+    .modal-nav-btn.next {
+        right: 10px;
+    }
+}
+
+#intro-page h1,
+#caution-page h1 {
+    font-family: 'Playfair Display', serif;
+    /* Elegant Serif */
+    font-weight: 700;
+    background: linear-gradient(45deg, #d32f2f, #ff6b6b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    /* Soft shadow */
+}
+
+/* --- Desktop Intro Page --- */
+#intro-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fdfbf7;
+    background-image: radial-gradient(#e6e2da 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* Entire page clickable */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro-content {
+    text-align: center;
+    padding: 3rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    animation: float 3s ease-in-out infinite;
+}
+
+#intro-page h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    letter-spacing: 5px;
+    color: var(--text-primary);
+    margin: 1rem 0;
+}
+
+#intro-page p {
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.heart-icon {
+    font-size: 2rem;
+    color: #e57373;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.3);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.3);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+}
+
+/* Hide Desktop Intro on Mobile (switch with Caution) */
+@media (max-width: 900px) {
+    #intro-page {
+        display: none;
+    }
+}
+
+/* Show only on Mobile */
+@media (max-width: 900px) {
+    #caution-page {
+        display: flex;
+    }
+}
+
+.caution-content {
+    max-width: 600px;
+    width: 90%;
+    padding: 2rem;
+    border: 2px dashed var(--wood-dark);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.caution-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+#caution-page h1 {
+    font-family: var(--font-heading);
+    color: #d32f2f;
+    /* Red for caution */
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.caution-text {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+.caution-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 2rem;
+}
+
+.caution-img-wrapper img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease;
+}
+
+.caution-img-wrapper:nth-child(2) img {
+    transform: rotate(5deg);
+}
+
+.caution-img-wrapper img:hover {
+    transform: scale(1.1) z-index 2;
+}
+
+#enter-site-btn {
+    background: var(--text-primary);
+    color: var(--primary-color);
+    border: none;
+    padding: 15px 40px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#enter-site-btn:hover {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide main content initially/prevent scroll behind */
+body.locked {
+    overflow: hidden;
+}
