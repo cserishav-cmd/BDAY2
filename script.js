@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = loginInput.value.trim();
         const username = loginUser ? loginUser.value.trim() : "";
 
-        if (username === "amabar" && password === "ambar@51") {
+        if (username === "ambar" && password === "ambar@51") {
             // Success
             if (errorMsg) errorMsg.classList.add('hidden');
 
