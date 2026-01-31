@@ -382,7 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = loginInput.value.trim();
         const username = loginUser ? loginUser.value.trim() : "";
 
-        if (username === "ambar" && password === "ambar@51") {
+        // Ensure env is loaded and not empty
+        if (env.login_id && username === env.login_id && password === env.login_pass) {
             // Success
             if (errorMsg) errorMsg.classList.add('hidden');
 
