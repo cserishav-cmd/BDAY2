@@ -12,6 +12,26 @@ document.addEventListener('DOMContentLoaded', () => {
         "sticker_travelinghill"
     ];
 
+    // --- Load Environment Variables ---
+    let env = { login_id: '', login_pass: '' };
+    fetch('config.json')
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP status ${res.status}`);
+            return res.json();
+        })
+        .then(data => {
+            env = data; // Simple assignment for JSON
+        })
+        .catch(e => {
+            console.error("Failed to load config.json", e);
+            const err = document.getElementById('error-msg');
+            if (err) {
+                err.innerHTML = "⚠️ Config load failed. If opening file directly, use a local server.";
+                err.classList.remove('hidden');
+                err.style.color = "#ffdd57";
+            }
+        });
+
     // --- Image Protection (No Right Click / Drag) ---
     document.addEventListener('contextmenu', (e) => {
         if (e.target.tagName === 'IMG') {
@@ -362,7 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = loginInput.value.trim();
         const username = loginUser ? loginUser.value.trim() : "";
 
-        if (username === "amabar" && password === "ambar@51") {
+        // Ensure env is loaded and not empty
+        if (env.login_id && username === env.login_id && password === env.login_pass) {
             // Success
             if (errorMsg) errorMsg.classList.add('hidden');
 
