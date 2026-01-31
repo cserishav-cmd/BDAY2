@@ -342,10 +342,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Music Play Helper ---
     function tryPlayMusic() {
         if (!isPlaying && bgMusic.paused) {
+            // Fade In Logic
+            bgMusic.volume = 0;
             bgMusic.play().then(() => {
                 isPlaying = true;
                 if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 if (musicIcon) musicIcon.style.animationPlayState = 'running';
+
+                // Ramp volume
+                let vol = 0;
+                const interval = setInterval(() => {
+                    if (vol < 1) {
+                        vol += 0.05;
+                        bgMusic.volume = Math.min(vol, 1);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 100); // 2 seconds to full volume
             }).catch(e => console.log("Auto-play blocked:", e));
         }
     }
@@ -387,9 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Success
             if (errorMsg) errorMsg.classList.add('hidden');
 
-            // Fade out intro
-            introPage.style.opacity = '0';
-            introPage.style.pointerEvents = 'none';
+            // Fade out intro (Magic Door Effect)
+            introPage.classList.add('magic-door-open');
             document.body.classList.remove('locked');
 
             tryPlayMusic(); // Start music
@@ -811,6 +823,115 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start Visual Effects
     setInterval(spawnPetals, 400);
+
+    // --- Typewriter Effect for Letter ---
+    function initTypewriter() {
+        const letterBody = document.querySelector('.letter-body');
+        if (!letterBody) return;
+
+        const paragraphs = letterBody.querySelectorAll('p');
+        const originalTexts = [];
+
+        // Store and clear text
+        paragraphs.forEach(p => {
+            originalTexts.push(p.innerHTML);
+            p.innerHTML = '';
+            p.style.visibility = 'hidden';
+        });
+
+        // Typing function
+        function typeNode(node, text, speed = 30) {
+            return new Promise(resolve => {
+                node.style.visibility = 'visible';
+                node.innerHTML = '';
+                let i = 0;
+
+                // Cursor effect
+                node.style.borderRight = '2px solid var(--primary-color)';
+
+                function type() {
+                    if (i < text.length) {
+                        if (text.substring(i).startsWith('<')) {
+                            const endTag = text.indexOf('>', i);
+                            if (endTag !== -1) {
+                                node.innerHTML += text.substring(i, endTag + 1);
+                                i = endTag + 1;
+                            } else {
+                                node.innerHTML += text.charAt(i);
+                                i++;
+                            }
+                        } else {
+                            node.innerHTML += text.charAt(i);
+                            i++;
+                        }
+                        setTimeout(type, speed);
+                    } else {
+                        node.style.borderRight = 'none'; // Remove cursor
+                        resolve();
+                    }
+                }
+                type();
+            });
+        }
+
+        // Observer to trigger
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    observer.disconnect(); // Run once
+
+                    // Sequence
+                    async function runSequence() {
+                        for (let i = 0; i < paragraphs.length; i++) {
+                            await typeNode(paragraphs[i], originalTexts[i], 30);
+                            await new Promise(r => setTimeout(r, 400));
+                        }
+                    }
+                    runSequence();
+                }
+            });
+        }, { threshold: 0.2 });
+
+        observer.observe(letterBody);
+    }
+
+    initTypewriter();
+
+    // --- Parallax Effect ---
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        // Move Shapes
+        const shapes = document.querySelectorAll('.floating-shape');
+        shapes.forEach((shape, index) => {
+            const factor = (index + 1) * 20;
+            shape.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+        });
+
+        // Slight shift for Polaroids (3D feel)
+        // Optimization: utilize requestAnimationFrame if possible, but CSS transition handles smooting
+        // Let's target the wrapper for a subtle tilt
+    });
+
+    // --- Interactive Train ---
+    document.addEventListener('click', (e) => {
+        const train = e.target.closest('#train-engine');
+        if (train) {
+            // Toot Toot!
+            spawnSmoke(parseFloat(train.style.left) || 0, parseFloat(train.style.top) || 0); // Safe parse
+
+            // Visual bounce
+            train.style.transform += " scale(1.2)";
+            setTimeout(() => {
+                // The animation loop overrides transform constantly, so we might fight it.
+                // Better to set a flag or just use filter which isn't overriden by animateTrain
+                train.style.filter = "brightness(1.5) drop-shadow(0 0 10px gold)";
+            }, 50);
+            setTimeout(() => train.style.filter = "none", 300);
+        }
+    });
+
 });
 
 // --- Falling Petals Logic ---
